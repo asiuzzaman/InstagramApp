@@ -16,6 +16,7 @@
 		15E4AB1D2A6C3C170024C4C3 /* InstagramAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4AB1C2A6C3C170024C4C3 /* InstagramAppTests.swift */; };
 		15E4AB272A6C3C170024C4C3 /* InstagramAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4AB262A6C3C170024C4C3 /* InstagramAppUITests.swift */; };
 		15E4AB292A6C3C170024C4C3 /* InstagramAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4AB282A6C3C170024C4C3 /* InstagramAppUITestsLaunchTests.swift */; };
+		15E4AB3C2A6C3DB70024C4C3 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4AB3B2A6C3DB70024C4C3 /* MainTabController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		15E4AB222A6C3C170024C4C3 /* InstagramAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15E4AB262A6C3C170024C4C3 /* InstagramAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAppUITests.swift; sourceTree = "<group>"; };
 		15E4AB282A6C3C170024C4C3 /* InstagramAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		15E4AB3B2A6C3DB70024C4C3 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,12 @@
 		15E4AB042A6C3C160024C4C3 /* InstagramApp */ = {
 			isa = PBXGroup;
 			children = (
+				15E4AB3A2A6C3D500024C4C3 /* API */,
+				15E4AB392A6C3D3B0024C4C3 /* ViewModel */,
+				15E4AB382A6C3D270024C4C3 /* Utils */,
+				15E4AB372A6C3D140024C4C3 /* Controllers */,
+				15E4AB362A6C3D0A0024C4C3 /* View */,
+				15E4AB352A6C3CFD0024C4C3 /* Model */,
 				15E4AB052A6C3C160024C4C3 /* AppDelegate.swift */,
 				15E4AB072A6C3C160024C4C3 /* SceneDelegate.swift */,
 				15E4AB092A6C3C160024C4C3 /* ViewController.swift */,
@@ -125,6 +133,49 @@
 				15E4AB282A6C3C170024C4C3 /* InstagramAppUITestsLaunchTests.swift */,
 			);
 			path = InstagramAppUITests;
+			sourceTree = "<group>";
+		};
+		15E4AB352A6C3CFD0024C4C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		15E4AB362A6C3D0A0024C4C3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		15E4AB372A6C3D140024C4C3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				15E4AB3B2A6C3DB70024C4C3 /* MainTabController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		15E4AB382A6C3D270024C4C3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		15E4AB392A6C3D3B0024C4C3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		15E4AB3A2A6C3D500024C4C3 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +311,7 @@
 			files = (
 				15E4AB0A2A6C3C160024C4C3 /* ViewController.swift in Sources */,
 				15E4AB062A6C3C160024C4C3 /* AppDelegate.swift in Sources */,
+				15E4AB3C2A6C3DB70024C4C3 /* MainTabController.swift in Sources */,
 				15E4AB082A6C3C160024C4C3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
