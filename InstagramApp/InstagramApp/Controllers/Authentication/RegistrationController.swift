@@ -42,6 +42,7 @@ class RegistrationController: UIViewController {
         button.layer.cornerRadius = 5
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -53,12 +54,31 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    private var profileImage = UIImage()
     private var viewModel = RegistrationViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureNotificationObserver()
+    }
+    
+    @objc func handleShowSignUp() {
+        
+        guard let email = viewModel.email else { return }
+        guard let pass = viewModel.password else { return }
+        guard let userName = viewModel.userName else { return }
+        guard let fullName = viewModel.fullName else { return }
+        
+        AuthService.registerUser(
+            withCredentials: AuthCredentials(
+                email: email,
+                password: pass,
+                userName: userName,
+                fullName: fullName,
+                profileImage: profileImage
+            )
+        )
     }
     
     @objc func handleShowLogin() {
@@ -109,16 +129,16 @@ class RegistrationController: UIViewController {
     @objc func didTextChange(sender: UITextField) {
         switch sender {
         case emailTextField:
-            print("[emailTextField] \(String(describing: sender.text))")
+            //print("[emailTextField] \(String(describing: sender.text))")
             viewModel.email = emailTextField.text
         case passwordTextField:
-            print("[passwordTextField] \(String(describing: sender.text))")
+            //print("[passwordTextField] \(String(describing: sender.text))")
             viewModel.password = passwordTextField.text
         case userNameTextField:
-            print("[userNameTextField] \(String(describing: sender.text))")
+            //print("[userNameTextField] \(String(describing: sender.text))")
             viewModel.userName = userNameTextField.text
         case fullNameTextField:
-            print("[fullNameTextField] \(String(describing: sender.text))")
+            //print("[fullNameTextField] \(String(describing: sender.text))")
             viewModel.fullName = fullNameTextField.text
         default:
             print("[Registration] unknown field ")
@@ -146,6 +166,8 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
             print("Image couldn't be selected")
             return
         }
+        
+        profileImage = selectedImage
         plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width/2
         plusPhotoButton.layer.masksToBounds = true
         plusPhotoButton.layer.borderColor = UIColor.white.cgColor

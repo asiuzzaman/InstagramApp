@@ -5,7 +5,7 @@
 //  Created by Md. Asiuzzaman on 23/7/23.
 //
 import UIKit
-//import JGProgressHUD
+import JGProgressHUD
 
 extension UIViewController {
    // static let hud = JGProgressHUD(style: .dark)
