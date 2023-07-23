@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		157127532A6CFC8D002757EE /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157127522A6CFC8D002757EE /* LoginController.swift */; };
+		157127552A6CFC9D002757EE /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157127542A6CFC9D002757EE /* RegistrationController.swift */; };
 		15E4AB062A6C3C160024C4C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4AB052A6C3C160024C4C3 /* AppDelegate.swift */; };
 		15E4AB082A6C3C160024C4C3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4AB072A6C3C160024C4C3 /* SceneDelegate.swift */; };
 		15E4AB0A2A6C3C160024C4C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4AB092A6C3C160024C4C3 /* ViewController.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		157127522A6CFC8D002757EE /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		157127542A6CFC9D002757EE /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		15E4AB022A6C3C160024C4C3 /* InstagramApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15E4AB052A6C3C160024C4C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		15E4AB072A6C3C160024C4C3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		157127512A6CFC75002757EE /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				157127522A6CFC8D002757EE /* LoginController.swift */,
+				157127542A6CFC9D002757EE /* RegistrationController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		15E4AAF92A6C3C160024C4C3 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +180,7 @@
 		15E4AB372A6C3D140024C4C3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				157127512A6CFC75002757EE /* Authentication */,
 				15E4AB3B2A6C3DB70024C4C3 /* MainTabController.swift */,
 				15E4AB3D2A6C40720024C4C3 /* FeedController.swift */,
 				15E4AB3F2A6C408C0024C4C3 /* SearchController.swift */,
@@ -331,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15E4AB0A2A6C3C160024C4C3 /* ViewController.swift in Sources */,
+				157127532A6CFC8D002757EE /* LoginController.swift in Sources */,
 				15E4AB4C2A6C5BBF0024C4C3 /* FeedCell.swift in Sources */,
 				15E4AB422A6C40A20024C4C3 /* ImageSelectorController.swift in Sources */,
 				15E4AB442A6C40B30024C4C3 /* NotificationController.swift in Sources */,
@@ -341,6 +356,7 @@
 				15E4AB3C2A6C3DB70024C4C3 /* MainTabController.swift in Sources */,
 				15E4AB4E2A6C5EF60024C4C3 /* Extensions.swift in Sources */,
 				15E4AB082A6C3C160024C4C3 /* SceneDelegate.swift in Sources */,
+				157127552A6CFC9D002757EE /* RegistrationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
