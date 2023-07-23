@@ -78,7 +78,15 @@ class RegistrationController: UIViewController {
                 fullName: fullName,
                 profileImage: profileImage
             )
-        )
+        ) { error in
+            if let error = error {
+                print("[RC] Debug: Failed to register user: \(error.localizedDescription)")
+                return
+            }
+            
+            print("Successfully registered")
+            
+        }
     }
     
     @objc func handleShowLogin() {
