@@ -52,10 +52,12 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    private var viewModel = RegistrationViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureNotificationObserver()
     }
     
     @objc func handleShowLogin() {
@@ -88,4 +90,42 @@ class RegistrationController: UIViewController {
         alreadyHaveAccountButton.centerX(inView: view)
     }
     
+    func configureNotificationObserver() {
+        emailTextField.addTarget(self, action: #selector(didTextChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(didTextChange), for: .editingChanged)
+        
+        userNameTextField.addTarget(self, action: #selector(didTextChange), for: .editingChanged)
+        fullNameTextField.addTarget(self, action: #selector(didTextChange), for: .editingChanged)
+    }
+    
+    @objc func didTextChange(sender: UITextField) {
+        switch sender {
+        case emailTextField:
+            print("[emailTextField] \(String(describing: sender.text))")
+            viewModel.email = emailTextField.text
+        case passwordTextField:
+            print("[passwordTextField] \(String(describing: sender.text))")
+            viewModel.password = passwordTextField.text
+        case userNameTextField:
+            print("[userNameTextField] \(String(describing: sender.text))")
+            viewModel.userName = userNameTextField.text
+        case fullNameTextField:
+            print("[fullNameTextField] \(String(describing: sender.text))")
+            viewModel.fullName = fullNameTextField.text
+        default:
+            print("[Registration] unknown field ")
+        }
+        
+        updateForm()
+        
+    }
+    
+}
+
+extension RegistrationController: FormViewModel {
+    func updateForm() {
+        signupButton.backgroundColor = viewModel.buttonBackgroudColor
+        signupButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        signupButton.isEnabled = viewModel.isFormValid
+    }
 }

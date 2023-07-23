@@ -53,9 +53,12 @@ class LoginController: UIViewController {
         return button
     }()
     
+    private var viewModel = LoginViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureNotificationObserver()
     }
     
     @objc func handleShowSignUp() {
@@ -95,5 +98,28 @@ class LoginController: UIViewController {
         dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
         dontHaveAccountButton.centerX(inView: view)
         
+    }
+    
+    func configureNotificationObserver() {
+        emailTextField.addTarget(self, action: #selector(didTextChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(didTextChange), for: .editingChanged)
+    }
+    
+    @objc func didTextChange(sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        }
+        else {
+            viewModel.password = sender.text
+        }
+       updateForm()
+    }
+}
+
+extension LoginController: FormViewModel {
+    func updateForm() {
+        loginButton.backgroundColor = viewModel.buttonBackgroudColor
+        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        loginButton.isEnabled = viewModel.isFormValid
     }
 }
