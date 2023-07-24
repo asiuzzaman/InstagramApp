@@ -37,6 +37,7 @@ class LoginController: UIViewController {
         button.layer.cornerRadius = 5
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
     
@@ -59,6 +60,18 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureNotificationObserver()
+    }
+    
+    @objc func handleLogin() {
+        guard let email = viewModel.email else { return }
+        guard let pass = viewModel.password else { return }
+        AuthService.userLogin(with: email, password: pass) { result, error in
+            
+            if let error = error {
+                print("Error while login error: \(error.localizedDescription)")
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc func handleShowSignUp() {

@@ -83,7 +83,7 @@ class RegistrationController: UIViewController {
                 print("[RC] Debug: Failed to register user: \(error.localizedDescription)")
                 return
             }
-            
+            self.dismiss(animated: true, completion: nil)
             print("Successfully registered")
             
         }
