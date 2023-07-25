@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		151B70C32A6F9B0C00354E04 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B70C22A6F9B0C00354E04 /* ProfileCell.swift */; };
 		151B70C52A6F9B1900354E04 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B70C42A6F9B1900354E04 /* ProfileHeader.swift */; };
+		151B70C72A6FEA0E00354E04 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B70C62A6FEA0E00354E04 /* Constants.swift */; };
+		151B70C92A6FEAAF00354E04 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B70C82A6FEAAF00354E04 /* UserService.swift */; };
+		151B70CB2A6FED4A00354E04 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151B70CA2A6FED4A00354E04 /* User.swift */; };
 		1564C1C32A6D86240007FEC3 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1564C1C22A6D86240007FEC3 /* JGProgressHUD */; };
 		1564C1C52A6D86530007FEC3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1564C1C42A6D86530007FEC3 /* GoogleService-Info.plist */; };
 		1564C1C82A6D88590007FEC3 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 1564C1C72A6D88590007FEC3 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -62,6 +65,9 @@
 /* Begin PBXFileReference section */
 		151B70C22A6F9B0C00354E04 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		151B70C42A6F9B1900354E04 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		151B70C62A6FEA0E00354E04 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		151B70C82A6FEAAF00354E04 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserService.swift; path = InstagramApp/Utils/UserService.swift; sourceTree = SOURCE_ROOT; };
+		151B70CA2A6FED4A00354E04 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = InstagramApp/Utils/User.swift; sourceTree = SOURCE_ROOT; };
 		1564C1C42A6D86530007FEC3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1564C1D32A6D8F250007FEC3 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageUploader.swift; path = InstagramApp/View/ImageUploader.swift; sourceTree = SOURCE_ROOT; };
 		1564C1D52A6D93B40007FEC3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthService.swift; path = InstagramApp/View/AuthService.swift; sourceTree = SOURCE_ROOT; };
@@ -203,6 +209,7 @@
 		15E4AB352A6C3CFD0024C4C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				151B70CA2A6FED4A00354E04 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				15E4AB4D2A6C5EF60024C4C3 /* Extensions.swift */,
+				151B70C62A6FEA0E00354E04 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -252,6 +260,7 @@
 			children = (
 				1564C1D32A6D8F250007FEC3 /* ImageUploader.swift */,
 				1564C1D52A6D93B40007FEC3 /* AuthService.swift */,
+				151B70C82A6FEAAF00354E04 /* UserService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -411,11 +420,14 @@
 				157127592A6D2EE9002757EE /* AuthenticationViewModel.swift in Sources */,
 				15E4AB402A6C408C0024C4C3 /* SearchController.swift in Sources */,
 				15E4AB062A6C3C160024C4C3 /* AppDelegate.swift in Sources */,
+				151B70CB2A6FED4A00354E04 /* User.swift in Sources */,
 				15E4AB462A6C40C40024C4C3 /* ProfileController.swift in Sources */,
 				15E4AB3E2A6C40720024C4C3 /* FeedController.swift in Sources */,
 				15E4AB3C2A6C3DB70024C4C3 /* MainTabController.swift in Sources */,
 				15E4AB4E2A6C5EF60024C4C3 /* Extensions.swift in Sources */,
+				151B70C92A6FEAAF00354E04 /* UserService.swift in Sources */,
 				1564C1D42A6D8F250007FEC3 /* ImageUploader.swift in Sources */,
+				151B70C72A6FEA0E00354E04 /* Constants.swift in Sources */,
 				1564C1D62A6D93B40007FEC3 /* AuthService.swift in Sources */,
 				151B70C32A6F9B0C00354E04 /* ProfileCell.swift in Sources */,
 				15E4AB082A6C3C160024C4C3 /* SceneDelegate.swift in Sources */,

@@ -11,9 +11,22 @@ class ProfileController: UICollectionViewController {
     private let profileCellIdentifier = "profileCell"
     private let profileHeaderIdentifier = "headerIdentifier"
     
+    private var user: User? {
+        didSet {
+            navigationItem.title = user?.userName
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureProfile()
+        fetchUser()
+    }
+    
+    func fetchUser() {
+        UserService.fetchuser { user in
+            self.user = user
+        }
     }
     
     func configureProfile() {
