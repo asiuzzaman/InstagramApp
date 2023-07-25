@@ -9,6 +9,12 @@ import UIKit
 
 class ProfileHeader: UICollectionReusableView {
     
+    var viewModel: ProfileHeaderViewModel? {
+        didSet {
+            configure()
+        }
+    }
+    
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -139,6 +145,34 @@ class ProfileHeader: UICollectionReusableView {
     
     @objc func handleEditProfileFollowTapped() {
             print("Debug handleEditProfileFollowTapped is tapped")
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) {
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            // always update the UI from the main thread
+            DispatchQueue.main.async() { [weak self] in
+                self?.profileImageView.image = UIImage(data: data)
+            }
+            
+        }
+    }
+    
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        guard let imageURL = viewModel.profileImageUrl else {
+            print("[ProfileHeader] Couldn't get URL")
+            return
+        }
+        profileNameLabel.text = viewModel.fullName
+        downloadImage(from: imageURL)
     }
     
     func attributedStatText(value: Int, label: String) -> NSAttributedString {
