@@ -57,6 +57,8 @@ class RegistrationController: UIViewController {
     private var profileImage = UIImage()
     private var viewModel = RegistrationViewModel()
     
+    weak var registrationDelegate: AuthenticationDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -83,7 +85,7 @@ class RegistrationController: UIViewController {
                 print("[RC] Debug: Failed to register user: \(error.localizedDescription)")
                 return
             }
-            self.dismiss(animated: true, completion: nil)
+            self.registrationDelegate?.authenticationDidComplete()
             print("Successfully registered")
             
         }

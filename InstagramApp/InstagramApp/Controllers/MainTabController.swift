@@ -10,17 +10,25 @@ import Firebase
 
 class MainTabController: UITabBarController {
     
+    private var user: User? {
+        didSet {
+            guard let user else { return }
+            configureViewControllers(withUser: user)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViewControllers()
         checkIfUserIsLoggedIn()
         //logout()
+        fetchUser()
     }
     
     func checkIfUserIsLoggedIn() {
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let controller = LoginController()
+                controller.delegate = self
                 let nav = UINavigationController(rootViewController: controller)
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
@@ -37,7 +45,13 @@ class MainTabController: UITabBarController {
         }
     }
     
-    func configureViewControllers() {
+    func fetchUser() {
+        UserService.fetchuser { user in
+            self.user = user
+        }
+    }
+    
+    func configureViewControllers(withUser user: User) {
         view.backgroundColor = .white
         
         let layout = UICollectionViewFlowLayout()
@@ -63,10 +77,11 @@ class MainTabController: UITabBarController {
         )
         
         ///  profile layout
+        let profileController = ProfileController(user: user)
         let profie = templateNavigationController(
             unselectedImage: UIImage(imageLiteralResourceName: "profile_unselected"),
             selectedImage: UIImage(imageLiteralResourceName: "profile_selected"),
-            viewController: ProfileController(collectionViewLayout: layout)
+            viewController: profileController
         )
         
         viewControllers = [feed, search, image, notifications, profie]
@@ -83,5 +98,13 @@ class MainTabController: UITabBarController {
         nav.tabBarItem.selectedImage = selectedImage
         nav.navigationBar.tintColor = .black
         return nav
+    }
+}
+
+extension MainTabController: AuthenticationDelegate {
+    func authenticationDidComplete() {
+        print("Tapped authenticationDidComplete")
+        fetchUser()
+        self.dismiss(animated: true, completion: nil)
     }
 }

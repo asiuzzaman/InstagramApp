@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol AuthenticationDelegate: AnyObject {
+    func authenticationDidComplete()
+}
+
 class LoginController: UIViewController {
     
+    
+    weak var delegate: AuthenticationDelegate?
     
     private let iconImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "Instagram_logo_white"))
@@ -70,12 +76,13 @@ class LoginController: UIViewController {
             if let error = error {
                 print("Error while login error: \(error.localizedDescription)")
             }
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.authenticationDidComplete()
         }
     }
     
     @objc func handleShowSignUp() {
         let controller = RegistrationController()
+        controller.registrationDelegate = delegate
         navigationController?.pushViewController(controller, animated: true)
     }
     

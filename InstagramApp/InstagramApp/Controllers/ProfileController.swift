@@ -11,28 +11,25 @@ class ProfileController: UICollectionViewController {
     private let profileCellIdentifier = "profileCell"
     private let profileHeaderIdentifier = "headerIdentifier"
     
-    private var user: User? {
-        didSet {
-            collectionView.reloadData()
-        }
+    private var user: User
+    
+    init(user: User) {
+        self.user = user
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureProfile()
-        fetchUser()
     }
-    
-    func fetchUser() {
-        UserService.fetchuser { user in
-            self.user = user
-            self.navigationItem.title = user.userName
-        }
-    }
-    
-    func configureProfile() {
-        collectionView.backgroundColor = .white
         
+    func configureProfile() {
+        navigationItem.title = user.userName
+        collectionView.backgroundColor = .white
         collectionView.register(
             ProfileCell.self,
             forCellWithReuseIdentifier: profileCellIdentifier
@@ -62,14 +59,12 @@ extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         print("[ProfileController] viewForSupplementaryElementOfKind is called")
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: profileHeaderIdentifier, for: indexPath) as! ProfileHeader
-        
-        if let user = user {
-            header.viewModel = ProfileHeaderViewModel(user: user)
-        } else {
-            print("Debug: ProfileController viewModel didn't set yet")
-        }
-        
+        let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: profileHeaderIdentifier,
+            for: indexPath
+        ) as! ProfileHeader
+        header.viewModel = ProfileHeaderViewModel(user: user)
         return header
     }
     
