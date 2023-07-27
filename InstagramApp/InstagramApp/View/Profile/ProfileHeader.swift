@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol ProfileHeaderDelegate: AnyObject {
+    func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User)
+    //func header(_ profileHeader: ProfileHeader, wantsToUnfollow uid: String)
+    //func headerWantsToShowEditProfile(_ profileHeader: ProfileHeader)
+}
+
 class ProfileHeader: UICollectionReusableView {
     
     var viewModel: ProfileHeaderViewModel? {
@@ -14,6 +20,8 @@ class ProfileHeader: UICollectionReusableView {
             configure()
         }
     }
+    
+    weak var delegate : ProfileHeaderDelegate?
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -145,6 +153,8 @@ class ProfileHeader: UICollectionReusableView {
     
     @objc func handleEditProfileFollowTapped() {
             print("Debug handleEditProfileFollowTapped is tapped")
+        guard let viewModel else { return }
+        delegate?.header(self, didTapActionButtonFor: viewModel.user)
     }
     
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
@@ -173,6 +183,9 @@ class ProfileHeader: UICollectionReusableView {
         }
         profileNameLabel.text = viewModel.fullName
         downloadImage(from: imageURL)
+        editProfileFollowButton.setTitle(viewModel.followButtonText, for: .normal)
+        editProfileFollowButton.backgroundColor = viewModel.followButtonBackgroudColor
+        editProfileFollowButton.setTitleColor(viewModel.followButtonTextColor, for: .normal)
     }
     
     func attributedStatText(value: Int, label: String) -> NSAttributedString {
