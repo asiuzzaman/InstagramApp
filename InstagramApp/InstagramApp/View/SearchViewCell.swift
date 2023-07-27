@@ -25,6 +25,43 @@ class SearchViewCell: UITableViewCell {
         return label
     }()
     
+    var searchViewCellViewModel: SearchViewCellViewModel? {
+        didSet {
+            configureSearchViewCell()
+        }
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) {
+        print("[SearchViewCell] Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("[SearchViewCell] Download Finished")
+            // always update the UI from the main thread
+            DispatchQueue.main.async() { [weak self] in
+                self?.profileImageView.image = UIImage(data: data)
+            }
+            
+        }
+    }
+    
+    func configureSearchViewCell() {
+        guard let viewModel = searchViewCellViewModel else { return }
+        
+        guard let imageURL = viewModel.profileImageURL else {
+            print("[ProfileHeader] Couldn't get URL")
+            return
+        }
+        userNameLabel.text = viewModel.userName
+        fullNameLabel.text = viewModel.userFullName
+        downloadImage(from: imageURL)
+        
+    }
+    
     private let fullNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Md. Asiuzzaman"
