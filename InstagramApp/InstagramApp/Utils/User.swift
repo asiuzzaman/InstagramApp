@@ -19,7 +19,7 @@ struct User {
         return Auth.auth().currentUser?.uid == uid
     }
     
-    let isFollowed = false
+    var isFollowed = false
     
     
     init(dictionary: [String: Any]) {

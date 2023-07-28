@@ -47,11 +47,12 @@ class ProfileController: UICollectionViewController {
 extension ProfileController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("[ProfileController] numberOfItemsInSection is called")
         return 10
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        print("[ProfileController] cellForItemAt is called")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: profileCellIdentifier, for: indexPath) as! ProfileCell
         return cell
     }
@@ -111,12 +112,19 @@ extension ProfileController: ProfileHeaderDelegate {
         }
         else if user.isFollowed {
             print("Handle unfollow the user here")
+            
+            UserService.unfollow(uid: user.uid) {
+                error in
+                self.user.isFollowed = false
+                self.collectionView.reloadData()
+            }
         }
         else {
             print("Handle follow the user here")
             UserService.follow(uid: user.uid) {
                 error in
-                
+                self.user.isFollowed = true
+                self.collectionView.reloadData()
             }
         }
     }

@@ -181,6 +181,8 @@ class ProfileHeader: UICollectionReusableView {
             print("[ProfileHeader] Couldn't get URL")
             return
         }
+        
+        print("[ProfileHeader] Configure")
         profileNameLabel.text = viewModel.fullName
         downloadImage(from: imageURL)
         editProfileFollowButton.setTitle(viewModel.followButtonText, for: .normal)
