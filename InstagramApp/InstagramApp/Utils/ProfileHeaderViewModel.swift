@@ -42,4 +42,23 @@ struct ProfileHeaderViewModel {
         return URL(string: user.profileImageUrl)
     }
     
+    var numberOfFollowers: NSAttributedString {
+        return attributedStatText(value: user.stats.follower, label: "Followers")
+    }
+    
+    var numberOfFollowing: NSAttributedString {
+        return attributedStatText(value: user.stats.following, label: "Following")
+    }
+    
+    // Send default 5 we have to change it
+    var numberOfPosts: NSAttributedString {
+        return attributedStatText(value: 5, label: "Posts")
+    }
+    
+    func attributedStatText(value: Int, label: String) -> NSAttributedString {
+        let attributedText = NSMutableAttributedString(string: "\(value)\n", attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: label, attributes: [.font: UIFont.boldSystemFont(ofSize: 14), .foregroundColor: UIColor.lightGray]))
+        return attributedText
+    }
+    
 }

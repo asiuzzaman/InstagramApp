@@ -26,6 +26,7 @@ class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         configureProfile()
         checkIfUserIsFollowed()
+        fetchUserStats()
     }
         
     func checkIfUserIsFollowed() {
@@ -35,6 +36,15 @@ class ProfileController: UICollectionViewController {
             self.collectionView.reloadData()
         }
     }
+    
+    func fetchUserStats() {
+        UserService.fetchUserStats(uid: user.uid) {
+            userStats in
+            self.user.stats = userStats
+            self.collectionView.reloadData()
+        }
+    }
+    
     func configureProfile() {
         navigationItem.title = user.userName
         collectionView.backgroundColor = .white
