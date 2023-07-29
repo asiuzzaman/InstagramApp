@@ -109,7 +109,8 @@ class MainTabController: UITabBarController {
                 print(" Debug: Selected Image is : \(selectedImage)")
                 
                 let postController = UploadPostController()
-                
+                postController.selectedImage = selectedImage
+                postController.delegate = self
                 let nav = UINavigationController(rootViewController: postController)
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: false, completion: nil)
@@ -150,5 +151,12 @@ extension MainTabController: UITabBarControllerDelegate {
         }
 
         return true
+    }
+}
+
+extension MainTabController: UploadPostControllerDelegate {
+    func didFinishUploadingPost(_ controller: UploadPostController) {
+        selectedIndex = 0
+        controller.dismiss(animated: true, completion: nil)
     }
 }

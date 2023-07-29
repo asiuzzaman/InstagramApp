@@ -7,13 +7,25 @@
 
 import UIKit
 
+protocol UploadPostControllerDelegate: AnyObject {
+    func didFinishUploadingPost(_ controller: UploadPostController)
+}
+
 class UploadPostController: UIViewController {
+    
+    
+    weak var delegate: UploadPostControllerDelegate?
+    
+    var selectedImage: UIImage? {
+        didSet {
+            photoImageView.image = selectedImage
+        }
+    }
     
     private let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.image = UIImage(imageLiteralResourceName: "venom-7")
         return imageView
     }()
     
@@ -42,8 +54,24 @@ class UploadPostController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func didTapShare() {
-        print("didTapShare")
+    @objc func didTapDone() {
+        print("didTapDone")
+        guard let image = selectedImage else { return }
+        guard let caption = captionTextView.text else { return }
+        
+        showLoader(true)
+        PostServices.uploadPost(caption: caption, image: image) {
+            error in
+            self.showLoader(false)
+            if let error = error {
+                print("Faced Error while uploading post")
+                return
+            }
+            
+            self.delegate?.didFinishUploadingPost(self)
+            //self.dismiss(animated: true, completion: nil)
+            // Now need to back to feed controller
+        }
     }
     
     func checkMaxLength(for textView: UITextView) {
@@ -61,7 +89,7 @@ class UploadPostController: UIViewController {
             action: #selector(didTapCancle)
         )
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .done, target: self, action: #selector(didTapShare))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .done, target: self, action: #selector(didTapDone))
         
         view.addSubview(photoImageView)
         photoImageView.layer.cornerRadius = 50
