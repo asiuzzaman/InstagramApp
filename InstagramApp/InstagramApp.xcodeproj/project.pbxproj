@@ -17,6 +17,7 @@
 		15499A9A2A7507CD0014473E /* UploadPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15499A992A7507CD0014473E /* UploadPostController.swift */; };
 		15499A9C2A7516D70014473E /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15499A9B2A7516D70014473E /* InputTextView.swift */; };
 		15499A9E2A758C920014473E /* PostServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15499A9D2A758C920014473E /* PostServices.swift */; };
+		15499AA02A7599A40014473E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15499A9F2A7599A40014473E /* Post.swift */; };
 		1564C1C32A6D86240007FEC3 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1564C1C22A6D86240007FEC3 /* JGProgressHUD */; };
 		1564C1C52A6D86530007FEC3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1564C1C42A6D86530007FEC3 /* GoogleService-Info.plist */; };
 		1564C1C82A6D88590007FEC3 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 1564C1C72A6D88590007FEC3 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -79,6 +80,7 @@
 		15499A992A7507CD0014473E /* UploadPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostController.swift; sourceTree = "<group>"; };
 		15499A9B2A7516D70014473E /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		15499A9D2A758C920014473E /* PostServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostServices.swift; path = InstagramApp/Utils/PostServices.swift; sourceTree = SOURCE_ROOT; };
+		15499A9F2A7599A40014473E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Post.swift; path = InstagramApp/Utils/Post.swift; sourceTree = SOURCE_ROOT; };
 		1564C1C42A6D86530007FEC3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1564C1D32A6D8F250007FEC3 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageUploader.swift; path = InstagramApp/View/ImageUploader.swift; sourceTree = SOURCE_ROOT; };
 		1564C1D52A6D93B40007FEC3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthService.swift; path = InstagramApp/View/AuthService.swift; sourceTree = SOURCE_ROOT; };
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				151B70CA2A6FED4A00354E04 /* User.swift */,
+				15499A9F2A7599A40014473E /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				15E4AB4E2A6C5EF60024C4C3 /* Extensions.swift in Sources */,
 				151B70C92A6FEAAF00354E04 /* UserService.swift in Sources */,
 				1564C1D42A6D8F250007FEC3 /* ImageUploader.swift in Sources */,
+				15499AA02A7599A40014473E /* Post.swift in Sources */,
 				151B70C72A6FEA0E00354E04 /* Constants.swift in Sources */,
 				1564C1D62A6D93B40007FEC3 /* AuthService.swift in Sources */,
 				151B70C32A6F9B0C00354E04 /* ProfileCell.swift in Sources */,

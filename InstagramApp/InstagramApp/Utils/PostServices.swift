@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 struct PostServices {
+    
     static func uploadPost(caption: String, image: UIImage, completion: @escaping(FirestoreCompletion)) {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -27,4 +28,16 @@ struct PostServices {
             COLLECTION_POSTS.addDocument(data: data, completion: completion)
         }
     }
+    
+    static func fetchPosts(completion: @escaping([Post]) -> Void ) {
+        
+        COLLECTION_USERS.getDocuments { (snapshot, error ) in
+            guard let querySnapshot = snapshot else { return }
+            
+            let posts = querySnapshot.documents.map({ Post(postId: $0.documentID, dictionary: $0.data()) })
+            completion(posts)
+            
+        }
+    }
+    
 }

@@ -11,10 +11,23 @@ import Firebase
 private let reuseIdentifier = "Cell"
 class FeedController: UICollectionViewController {
     
+    private var posts = [Post]()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        fetchPosts()
+    }
+    
+    func fetchPosts() {
+        PostServices.fetchPosts {
+            posts in
+            self.posts = posts
+            self.collectionView.reloadData()
+            
+            //print("user from search controller: \(users)")
+        }
     }
     
     @objc func handleLogout() {
@@ -46,7 +59,7 @@ class FeedController: UICollectionViewController {
 extension FeedController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
