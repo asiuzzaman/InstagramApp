@@ -17,8 +17,11 @@ class UploadPostController: UIViewController {
         return imageView
     }()
     
-    private let captionTextView: UITextView = {
-        let textView = UITextView()
+    private lazy var captionTextView: InputTextView = {
+        let textView = InputTextView()
+        textView.placeholderText = "Enter caption..."
+        textView.font = .systemFont(ofSize: 16)
+        textView.delegate = self
         return textView
     }()
     
@@ -41,6 +44,12 @@ class UploadPostController: UIViewController {
     
     @objc func didTapShare() {
         print("didTapShare")
+    }
+    
+    func checkMaxLength(for textView: UITextView) {
+        if textView.text.count > 100 {
+            textView.deleteBackward()
+        }
     }
     
     func configureUI() {
@@ -83,5 +92,14 @@ class UploadPostController: UIViewController {
             paddingRight: 12
         )
         
+    }
+}
+
+extension UploadPostController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        checkMaxLength(for: textView)
+        let count = textView.text.count
+        charCountLabel.text = "\(count)/100"
+        //captionTextView.placeholderLabel.isHidden = !captionTextView.text.isEmpty
     }
 }
