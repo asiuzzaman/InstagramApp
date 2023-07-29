@@ -19,6 +19,8 @@
 		15499A9E2A758C920014473E /* PostServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15499A9D2A758C920014473E /* PostServices.swift */; };
 		15499AA02A7599A40014473E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15499A9F2A7599A40014473E /* Post.swift */; };
 		15499AA22A75A03F0014473E /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15499AA12A75A03F0014473E /* PostViewModel.swift */; };
+		15499AA82A75AC500014473E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 15499AA72A75AC500014473E /* SDWebImage */; };
+		15499AAA2A75AC500014473E /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 15499AA92A75AC500014473E /* SDWebImageMapKit */; };
 		1564C1C32A6D86240007FEC3 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 1564C1C22A6D86240007FEC3 /* JGProgressHUD */; };
 		1564C1C52A6D86530007FEC3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1564C1C42A6D86530007FEC3 /* GoogleService-Info.plist */; };
 		1564C1C82A6D88590007FEC3 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 1564C1C72A6D88590007FEC3 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -126,6 +128,8 @@
 				1564C1CC2A6D88590007FEC3 /* FirebaseDatabase in Frameworks */,
 				1564C1D22A6D88590007FEC3 /* FirebaseStorage in Frameworks */,
 				1564C1CE2A6D88590007FEC3 /* FirebaseFirestore in Frameworks */,
+				15499AAA2A75AC500014473E /* SDWebImageMapKit in Frameworks */,
+				15499AA82A75AC500014473E /* SDWebImage in Frameworks */,
 				1564C1C82A6D88590007FEC3 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				15499A982A74FAD60014473E /* YPImagePicker in Frameworks */,
 			);
@@ -316,6 +320,8 @@
 				1564C1CF2A6D88590007FEC3 /* FirebaseMessaging */,
 				1564C1D12A6D88590007FEC3 /* FirebaseStorage */,
 				15499A972A74FAD60014473E /* YPImagePicker */,
+				15499AA72A75AC500014473E /* SDWebImage */,
+				15499AA92A75AC500014473E /* SDWebImageMapKit */,
 			);
 			productName = InstagramApp;
 			productReference = 15E4AB022A6C3C160024C4C3 /* InstagramApp.app */;
@@ -393,6 +399,7 @@
 				1564C1C12A6D86240007FEC3 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				1564C1C62A6D88590007FEC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				15499A962A74FAD60014473E /* XCRemoteSwiftPackageReference "YPImagePicker" */,
+				15499AA62A75AC500014473E /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 15E4AB032A6C3C160024C4C3 /* Products */;
 			projectDirPath = "";
@@ -819,6 +826,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		15499AA62A75AC500014473E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		1564C1C12A6D86240007FEC3 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
@@ -842,6 +857,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 15499A962A74FAD60014473E /* XCRemoteSwiftPackageReference "YPImagePicker" */;
 			productName = YPImagePicker;
+		};
+		15499AA72A75AC500014473E /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15499AA62A75AC500014473E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		15499AA92A75AC500014473E /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15499AA62A75AC500014473E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
 		};
 		1564C1C22A6D86240007FEC3 /* JGProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;

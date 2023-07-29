@@ -158,20 +158,6 @@ class ProfileHeader: UICollectionReusableView {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    func downloadImage(from url: URL) {
-        print("Download Started")
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
-            // always update the UI from the main thread
-            DispatchQueue.main.async() { [weak self] in
-                self?.profileImageView.image = UIImage(data: data)
-            }
-            
-        }
-    }
-    
     func configure() {
         guard let viewModel = viewModel else { return }
         guard let imageURL = viewModel.profileImageUrl else {
@@ -181,7 +167,7 @@ class ProfileHeader: UICollectionReusableView {
         
         print("[ProfileHeader] Configure")
         profileNameLabel.text = viewModel.fullName
-        downloadImage(from: imageURL)
+        profileImageView.sd_setImage(with: imageURL)
         editProfileFollowButton.setTitle(viewModel.followButtonText, for: .normal)
         editProfileFollowButton.backgroundColor = viewModel.followButtonBackgroudColor
         editProfileFollowButton.setTitleColor(viewModel.followButtonTextColor, for: .normal)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FeedCell: UICollectionViewCell {
     
@@ -156,6 +157,7 @@ class FeedCell: UICollectionViewCell {
     func configure() {
         guard let viewModel else { return }
         captionLabel.text = viewModel.caption
+        postImageView.sd_setImage(with: viewModel.imageUrl)
     }
     
     func configureActionsButton() {
