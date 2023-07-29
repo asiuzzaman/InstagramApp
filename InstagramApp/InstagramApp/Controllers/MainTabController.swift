@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import YPImagePicker
 
 class MainTabController: UITabBarController {
     
@@ -106,5 +107,15 @@ extension MainTabController: AuthenticationDelegate {
         print("Tapped authenticationDidComplete")
         fetchUser()
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension MainTabController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = viewControllers?.firstIndex(of: viewController)
+        
+        print("TabIndex: \(String(describing: index))")
+        
+        return true
     }
 }
