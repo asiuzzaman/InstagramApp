@@ -55,6 +55,7 @@ class MainTabController: UITabBarController {
     func configureViewControllers(withUser user: User) {
         view.backgroundColor = .white
         
+        self.delegate = self
         let layout = UICollectionViewFlowLayout()
         let feed = templateNavigationController(
             unselectedImage: UIImage(imageLiteralResourceName: "home_unselected"),
@@ -100,6 +101,17 @@ class MainTabController: UITabBarController {
         nav.navigationBar.tintColor = .black
         return nav
     }
+    
+    func didFinishPickingMedia(for picker: YPImagePicker) {
+        picker.didFinishPicking { items, _ in
+            picker.dismiss(animated: true) {
+                guard let selectedImage = items.singlePhoto?.image else { return }
+                print(" Debug: Selected Image is : \(selectedImage)")
+            }
+            
+        }
+        
+    }
 }
 
 extension MainTabController: AuthenticationDelegate {
@@ -113,9 +125,24 @@ extension MainTabController: AuthenticationDelegate {
 extension MainTabController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let index = viewControllers?.firstIndex(of: viewController)
-        
-        print("TabIndex: \(String(describing: index))")
-        
+
+        if index == 2 {
+            var config = YPImagePickerConfiguration()
+            config.library.mediaType = .photo
+            config.shouldSaveNewPicturesToAlbum = false
+            config.startOnScreen = .library
+            config.screens = [.library]
+            config.hidesStatusBar = false
+            config.hidesBottomBar = false
+            config.library.maxNumberOfItems = 1
+            
+            
+            let picker = YPImagePicker(configuration: config)
+            picker.modalPresentationStyle = .fullScreen
+            present(picker, animated: true, completion: nil)
+            didFinishPickingMedia(for: picker)
+        }
+
         return true
     }
 }
