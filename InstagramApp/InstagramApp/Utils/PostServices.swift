@@ -31,7 +31,7 @@ struct PostServices {
     
     static func fetchPosts(completion: @escaping([Post]) -> Void ) {
         
-        COLLECTION_USERS.getDocuments { (snapshot, error ) in
+        COLLECTION_POSTS.getDocuments { (snapshot, error ) in
             guard let querySnapshot = snapshot else { return }
             
             let posts = querySnapshot.documents.map({ Post(postId: $0.documentID, dictionary: $0.data()) })
