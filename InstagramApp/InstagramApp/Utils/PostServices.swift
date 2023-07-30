@@ -33,7 +33,7 @@ struct PostServices {
     
     static func fetchPosts(completion: @escaping([Post]) -> Void ) {
         
-        COLLECTION_POSTS.order(by: "timestamp").getDocuments { (snapshot, error ) in
+        COLLECTION_POSTS.order(by: "timestamp", descending: true).getDocuments { (snapshot, error ) in
             guard let querySnapshot = snapshot else { return }
             
             let posts = querySnapshot.documents.map({ Post(postId: $0.documentID, dictionary: $0.data()) })
