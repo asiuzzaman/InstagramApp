@@ -13,6 +13,8 @@ class FeedController: UICollectionViewController {
     
     private var posts = [Post]()
     
+    var post: Post?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,9 @@ class FeedController: UICollectionViewController {
     
     /// Collection data from FireStore
     func fetchPosts() {
+        
+        guard post == nil else { return }
+        
         PostServices.fetchPosts {
             posts in
             self.posts = posts
@@ -51,7 +56,14 @@ class FeedController: UICollectionViewController {
         collectionView.backgroundColor = .white
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        if post == nil {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                title: "Logout",
+                style: .plain,
+                target: self,
+                action: #selector(handleLogout)
+            )
+        }
         
         navigationItem.title = "Feed"
         let refresher = UIRefreshControl()
@@ -69,12 +81,18 @@ class FeedController: UICollectionViewController {
 extension FeedController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+        return post == nil ? posts.count : 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FeedCell
-        cell.viewModel = PostViewModel(post: posts[indexPath.row])
+        
+        if let post = post {
+            cell.viewModel = PostViewModel(post: post)
+        } else {
+            cell.viewModel = PostViewModel(post: posts[indexPath.row])
+        }
+       
         return cell
     }
     
