@@ -23,6 +23,7 @@ class FeedCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(imageLiteralResourceName: "venom-7")
+        imageView.backgroundColor = .lightGray
         return imageView
     }()
     
@@ -67,7 +68,6 @@ class FeedCell: UICollectionViewCell {
     
     private let likeLabel: UILabel = {
         let label = UILabel()
-        label.text = "10 like"
         label.font = UIFont.boldSystemFont(ofSize: 13)
         return label
     }()
@@ -158,6 +158,9 @@ class FeedCell: UICollectionViewCell {
         guard let viewModel else { return }
         captionLabel.text = viewModel.caption
         postImageView.sd_setImage(with: viewModel.imageUrl)
+        profileImageView.sd_setImage(with: viewModel.userProfileImageUrl)
+        userNameButton.setTitle(viewModel.userName, for: .normal)
+        likeLabel.text = viewModel.likeLabelText
     }
     
     func configureActionsButton() {

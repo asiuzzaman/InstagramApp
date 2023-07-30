@@ -16,6 +16,8 @@ class UploadPostController: UIViewController {
     
     weak var delegate: UploadPostControllerDelegate?
     
+    var currentUser: User? 
+    
     var selectedImage: UIImage? {
         didSet {
             photoImageView.image = selectedImage
@@ -58,13 +60,14 @@ class UploadPostController: UIViewController {
         print("didTapDone")
         guard let image = selectedImage else { return }
         guard let caption = captionTextView.text else { return }
+        guard let user = currentUser else { return }
         
         showLoader(true)
-        PostServices.uploadPost(caption: caption, image: image) {
+        PostServices.uploadPost(caption: caption, image: image, user: user) {
             error in
             self.showLoader(false)
             if let error = error {
-                print("Faced Error while uploading post")
+                print("Faced Error while uploading post error: \(error.localizedDescription)")
                 return
             }
             

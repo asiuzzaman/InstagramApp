@@ -16,6 +16,18 @@ struct PostViewModel {
     
     var likes: Int { post.likes }
     
+    var userProfileImageUrl: URL? { URL(string: post.ownerImageUrl) }
+    
+    var userName: String { post.ownerUsername }
+    
+    var likeLabelText: String {
+        if post.likes > 1 {
+            return "\(post.likes) likes"
+        }
+        else {
+            return "\(post.likes) like"
+        }
+    }
     
     init(post: Post) {
         self.post = post

@@ -20,13 +20,14 @@ class FeedController: UICollectionViewController {
         fetchPosts()
     }
     
+    /// Collection data from FireStore
     func fetchPosts() {
         PostServices.fetchPosts {
             posts in
             self.posts = posts
+            print("fetchPosts is called ")
+            self.collectionView.refreshControl?.endRefreshing()
             self.collectionView.reloadData()
-            
-            //print("user from search controller: \(users)")
         }
     }
     
@@ -53,7 +54,16 @@ class FeedController: UICollectionViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
         navigationItem.title = "Feed"
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(handleRefreshController), for: .valueChanged)
+        collectionView.refreshControl = refresher
     }
+    
+    @objc func handleRefreshController() {
+        posts.removeAll()
+        fetchPosts()
+    }
+    
 }
 
 extension FeedController {
