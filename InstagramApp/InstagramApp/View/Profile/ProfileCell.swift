@@ -18,6 +18,12 @@ class ProfileCell : UICollectionViewCell {
         return imageView
     }()
     
+    var viewModel: PostViewModel? {
+        didSet {
+            configure()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -28,5 +34,10 @@ class ProfileCell : UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure() {
+        guard let viewModel else { return }
+        postImageView.sd_setImage(with: viewModel.imageUrl)
     }
 }

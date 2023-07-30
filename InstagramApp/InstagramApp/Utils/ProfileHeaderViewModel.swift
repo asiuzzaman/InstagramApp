@@ -52,7 +52,7 @@ struct ProfileHeaderViewModel {
     
     // Send default 5 we have to change it
     var numberOfPosts: NSAttributedString {
-        return attributedStatText(value: 5, label: "Posts")
+        return attributedStatText(value: user.stats.posts, label: "Posts")
     }
     
     func attributedStatText(value: Int, label: String) -> NSAttributedString {

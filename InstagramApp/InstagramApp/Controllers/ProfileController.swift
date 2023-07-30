@@ -12,6 +12,7 @@ class ProfileController: UICollectionViewController {
     private let profileHeaderIdentifier = "headerIdentifier"
     
     private var user: User
+    private var posts = [Post]()
     
     init(user: User) {
         self.user = user
@@ -27,12 +28,22 @@ class ProfileController: UICollectionViewController {
         configureProfile()
         checkIfUserIsFollowed()
         fetchUserStats()
+        fetchPosts()
     }
         
     func checkIfUserIsFollowed() {
         UserService.checkIfUserIsFollowed(uid: user.uid) {
             isFollowed in
             self.user.isFollowed = isFollowed
+            self.collectionView.reloadData()
+        }
+    }
+    
+    /// Collection data from FireStore for showing profile posted image
+    func fetchPosts() {
+        PostServices.fetchPosts(forUser: user.uid) {
+            posts in
+            self.posts = posts
             self.collectionView.reloadData()
         }
     }
@@ -66,12 +77,13 @@ extension ProfileController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("[ProfileController] numberOfItemsInSection is called")
-        return 10
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print("[ProfileController] cellForItemAt is called")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: profileCellIdentifier, for: indexPath) as! ProfileCell
+        cell.viewModel = PostViewModel(post: posts[indexPath.row])
         return cell
     }
     
