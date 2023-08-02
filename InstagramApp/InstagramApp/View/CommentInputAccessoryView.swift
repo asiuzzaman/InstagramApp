@@ -33,6 +33,7 @@ class CommentInfoAccessoryView: UIView {
         super.init(frame: frame)
         
         autoresizingMask = .flexibleHeight
+        backgroundColor = .white
         
         addSubview(postButton)
         postButton.anchor(top: topAnchor, right: rightAnchor, paddingRight: 8)
@@ -42,7 +43,7 @@ class CommentInfoAccessoryView: UIView {
             top: topAnchor,
             left: leftAnchor,
             bottom: safeAreaLayoutGuide.bottomAnchor,
-            right:  postButton.rightAnchor,
+            right:  postButton.leftAnchor,
             paddingTop: 8,
             paddingLeft: 8,
             paddingBottom: 8,
