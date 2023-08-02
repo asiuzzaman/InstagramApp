@@ -12,9 +12,33 @@ private let reuseIdentifier = "CommentCell"
 
 class CommentController: UICollectionViewController {
     
+    private lazy var commentInputView: CommentInfoAccessoryView = {
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        let cv = CommentInfoAccessoryView(frame: frame)
+        return cv
+    }()
+    
+    override var inputAccessoryView: UIView? {
+        get { return commentInputView }
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func configureUI() {
