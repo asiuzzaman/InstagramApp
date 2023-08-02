@@ -161,7 +161,7 @@ class FeedCell: UICollectionViewCell {
     }
     
     @objc func didTapComments() {
-        guard let viewModel else { return }
+        guard let viewModel = viewModel else { return }
         delegate?.cell(self, wantsToShowCommentsFor: viewModel.post)
     }
     

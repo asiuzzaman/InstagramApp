@@ -112,8 +112,7 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
 extension FeedController: FeedCellDelegate {
     func cell(_ cell: FeedCell, wantsToShowCommentsFor post: Post) {
         
-        let commentController = CommentController(collectionViewLayout: UICollectionViewLayout())
-        
+        let commentController = CommentController(collectionViewLayout: UICollectionViewFlowLayout())
         navigationController?.pushViewController(commentController, animated: true)
     }
 }
