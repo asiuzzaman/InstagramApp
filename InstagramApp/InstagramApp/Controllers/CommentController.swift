@@ -12,9 +12,10 @@ private let reuseIdentifier = "CommentCell"
 
 class CommentController: UICollectionViewController {
     
-    private lazy var commentInputView: CommentInfoAccessoryView = {
+    private lazy var commentInputView: CommentInputAccessoryView = {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
-        let cv = CommentInfoAccessoryView(frame: frame)
+        let cv = CommentInputAccessoryView(frame: frame)
+        cv.delegate = self
         return cv
     }()
     
@@ -24,6 +25,17 @@ class CommentController: UICollectionViewController {
     
     override var canBecomeFirstResponder: Bool {
         return true
+    }
+    
+    private let post: Post
+    
+    init(post: Post) {
+        self.post = post
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -53,7 +65,7 @@ class CommentController: UICollectionViewController {
 extension CommentController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 15
+        return 5
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -66,5 +78,29 @@ extension CommentController {
 extension CommentController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 80)
+    }
+}
+
+extension CommentController: CommentInputAccessoryViewDelegate {
+    func inputView(_ inputVeiw: CommentInputAccessoryView, wantsToUploadComment comment: String) {
+        
+        guard let tab = self.tabBarController as? MainTabController else { return }
+        
+        guard let user = tab.user else { return }
+        
+        self.showLoader(true)
+        
+        CommentService.uploadComment(
+            comment: comment,
+            postID: post.postId,
+            user: user) {
+                error in
+                if let err = error {
+                    print("Gets error while upload your comments")
+                }
+                self.showLoader(false)
+                inputVeiw.clearCommentTextView()
+            }
+        print("posted Comment: \(comment)")
     }
 }

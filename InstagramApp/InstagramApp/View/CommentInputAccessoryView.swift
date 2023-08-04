@@ -8,8 +8,16 @@
 import Foundation
 import UIKit
 
-class CommentInfoAccessoryView: UIView {
+protocol CommentInputAccessoryViewDelegate: AnyObject {
+    func inputView(_
+        inputVeiw: CommentInputAccessoryView,
+        wantsToUploadComment comment: String
+    )
+}
+
+class CommentInputAccessoryView: UIView {
     
+    weak var delegate: CommentInputAccessoryViewDelegate?
     
     private let commentTextView: InputTextView = {
         let textView = InputTextView()
@@ -66,7 +74,12 @@ class CommentInfoAccessoryView: UIView {
     }
     
     @objc func didTapPostButton() {
-        
+        delegate?.inputView(self, wantsToUploadComment: commentTextView.text)
+    }
+    
+    func clearCommentTextView() {
+        commentTextView.text = nil
+        commentTextView.placeholderLabel.isHidden = false
     }
     
     required init?(coder: NSCoder) {

@@ -9,7 +9,7 @@ import UIKit
 
 class InputTextView: UITextView {
     
-   private let placeholderLabel: UILabel = { /// Enter caption...
+     let placeholderLabel: UILabel = { /// Enter caption...
         let lebel = UILabel()
         lebel.textColor = .lightGray
         return lebel
