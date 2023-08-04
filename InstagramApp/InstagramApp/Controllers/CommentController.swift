@@ -29,6 +29,8 @@ class CommentController: UICollectionViewController {
     
     private let post: Post
     
+    private var comments = [Comment]()
+    
     init(post: Post) {
         self.post = post
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -41,6 +43,7 @@ class CommentController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchComments()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +54,14 @@ class CommentController: UICollectionViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    func fetchComments() {
+        CommentService.fetchComments(forPost: post.postId) {
+            comments in
+            self.comments = comments
+            self.collectionView.reloadData()
+        }
     }
     
     func configureUI() {
@@ -65,7 +76,7 @@ class CommentController: UICollectionViewController {
 extension CommentController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 5
+        return comments.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
