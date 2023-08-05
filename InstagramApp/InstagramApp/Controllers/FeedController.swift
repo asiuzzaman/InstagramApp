@@ -123,6 +123,12 @@ extension FeedController: FeedCellDelegate {
         
         if post.didLike {
             print("Unlike your post")
+            
+            PostServices.unlikePost(post: post) {
+                _ in
+                cell.likeButton.setImage(UIImage(imageLiteralResourceName: "like_unselected"), for: .normal)
+                cell.likeButton.tintColor = .black
+            }
         }
         else {
             print("Send like this post")
@@ -130,7 +136,7 @@ extension FeedController: FeedCellDelegate {
                 error in
                 
                 if let error = error {
-                    print("Failed to like this post")
+                    print("Failed to like this post: \(error.localizedDescription)")
                 }
                 cell.likeButton.setImage(UIImage(imageLiteralResourceName: "like_selected"), for: .normal)
                 cell.likeButton.tintColor = .red
