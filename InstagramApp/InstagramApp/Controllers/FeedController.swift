@@ -11,7 +11,11 @@ import Firebase
 private let reuseIdentifier = "Cell"
 class FeedController: UICollectionViewController {
     
-    private var posts = [Post]()
+    private var posts = [Post]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     var post: Post?
     
@@ -32,9 +36,24 @@ class FeedController: UICollectionViewController {
             self.posts = posts
             print("fetchPosts is called ")
             self.collectionView.refreshControl?.endRefreshing()
-            self.collectionView.reloadData()
+            self.checkIfUserLikedPost()
         }
     }
+    
+    func checkIfUserLikedPost() {
+        self.posts.forEach {
+            post in
+            PostServices.checkIfUserLikedPost(post: post) {
+                didLike in
+                //print("post is: \(post.caption) and Like is: \(didLike)")
+                if let index = self.posts.firstIndex(where: { $0.postId == post.postId }) {
+                    self.posts[index].didLike = didLike
+                }
+                
+            }
+        }
+    }
+    
     
     @objc func handleLogout() {
         
@@ -123,23 +142,21 @@ extension FeedController: FeedCellDelegate {
         
         if post.didLike {
             print("Unlike your post")
-            
-            PostServices.unlikePost(post: post) {
-                _ in
+            PostServices.unlikePost(post: post) { _ in
                 cell.likeButton.setImage(UIImage(imageLiteralResourceName: "like_unselected"), for: .normal)
                 cell.likeButton.tintColor = .black
+                cell.viewModel?.post.likes = post.likes - 1
             }
         }
         else {
             print("Send like this post")
-            PostServices.likePost(post: post) {
-                error in
-                
+            PostServices.likePost(post: post) { error in
                 if let error = error {
                     print("Failed to like this post: \(error.localizedDescription)")
                 }
                 cell.likeButton.setImage(UIImage(imageLiteralResourceName: "like_selected"), for: .normal)
                 cell.likeButton.tintColor = .red
+                cell.viewModel?.post.likes = post.likes + 1
             }
         }
     }

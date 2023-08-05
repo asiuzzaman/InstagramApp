@@ -179,6 +179,8 @@ class FeedCell: UICollectionViewCell {
         profileImageView.sd_setImage(with: viewModel.userProfileImageUrl)
         userNameButton.setTitle(viewModel.userName, for: .normal)
         likeLabel.text = viewModel.likeLabelText
+        likeButton.tintColor = viewModel.likeButtonTintColor
+        likeButton.setImage(viewModel.likeButtonImage, for: .normal)
     }
     
     func configureActionsButton() {
