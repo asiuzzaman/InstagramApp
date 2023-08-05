@@ -11,6 +11,7 @@ import SDWebImage
 protocol FeedCellDelegate: AnyObject {
     func cell(_ cell: FeedCell, wantsToShowCommentsFor post: Post)
     func cell(_ cell: FeedCell, didLike post: Post)
+    func cell(_ cell: FeedCell, wantsToShowProfile uid: String)
 }
 
 class FeedCell: UICollectionViewCell {
@@ -24,13 +25,16 @@ class FeedCell: UICollectionViewCell {
     
     weak var delegate: FeedCellDelegate?
     
-    private let profileImageView: UIImageView = {
+    private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(imageLiteralResourceName: "venom-7")
         imageView.backgroundColor = .lightGray
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showUserProfile))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tap)
         return imageView
     }()
     
@@ -39,7 +43,7 @@ class FeedCell: UICollectionViewCell {
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Venom", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
-        button.addTarget(self, action: #selector(didTapUserName), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showUserProfile), for: .touchUpInside)
         return button
     }()
     
@@ -155,8 +159,10 @@ class FeedCell: UICollectionViewCell {
         )
     }
     
-    @objc func didTapUserName() {
-        print("Debug: userName button tapped")
+    @objc func showUserProfile() {
+        print("Debug: userName or profile tapped")
+        guard let viewModel = viewModel else { return }
+        delegate?.cell(self, wantsToShowProfile: viewModel.post.ownerId)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
