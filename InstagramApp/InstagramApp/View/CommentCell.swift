@@ -9,6 +9,12 @@ import UIKit
 
 class CommentCell: UICollectionViewCell {
     
+    var viewModel: CommentViewModel? {
+        didSet {
+            configure()
+        }
+    }
+    
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -22,16 +28,9 @@ class CommentCell: UICollectionViewCell {
     
      private let commentLabel: UILabel =  {
          let label = UILabel()
-         
-         let attributedText = NSMutableAttributedString(string: "joker ", attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
-         
-         attributedText.append(NSAttributedString(string: " Some test comment for now", attributes: [.font: UIFont.boldSystemFont(ofSize: 14), .foregroundColor: UIColor.lightGray]))
-         
-         label.attributedText = attributedText
          return label
     }()
 
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(profileImageView)
@@ -49,9 +48,18 @@ class CommentCell: UICollectionViewCell {
             leftAnchor: profileImageView.rightAnchor,
             paddingLeft: 8
         )
+        commentLabel.anchor(right: rightAnchor, paddingRight: 8)
+        commentLabel.numberOfLines = 0
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    func configure() {
+        guard let viewModel else { return }
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        commentLabel.attributedText = viewModel.commentLabelText()
     }
 }
