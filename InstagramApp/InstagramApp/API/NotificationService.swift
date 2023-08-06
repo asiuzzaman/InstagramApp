@@ -35,7 +35,16 @@ struct NotificationService {
         
         
     }
-    static func fetchNotification() {
+    static func fetchNotifications(completion: @escaping([Notification]) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        COLLECTION_NOTIFICATIONS.document(uid).collection("user-notifications").getDocuments {
+            snapshot, _ in
+            
+            guard let documents = snapshot?.documents else { return }
+            
+            let notificaitons = documents.map ({ Notification(dictionary: $0.data()) })
+            completion(notificaitons)
+        }
         
     }
     
