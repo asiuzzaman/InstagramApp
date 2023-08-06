@@ -11,6 +11,12 @@ import UIKit
 class NotificationCell: UITableViewCell {
     
     
+    var viewModel: NotificationViewModel? {
+        didSet {
+            configure()
+        }
+    }
+    
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -23,8 +29,9 @@ class NotificationCell: UITableViewCell {
     
     private let infoLabel: UILabel = {
         let label = UILabel()
-        label.text = "zaman"
+        //label.text = "zaman"
         label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -77,6 +84,13 @@ class NotificationCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure() {
+        guard let viewModel else { return }
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        postImageView.sd_setImage(with: viewModel.postImageUrl)
+        infoLabel.attributedText = viewModel.notificationMessage
     }
     
     @objc func handleFollowButton() {

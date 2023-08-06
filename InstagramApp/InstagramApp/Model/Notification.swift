@@ -28,6 +28,8 @@ struct Notification {
     let postId: String?
     let type: NotificationType
     let id: String
+    let userProfileImageUrl: String
+    let username: String
     
     init(dictionary: [String: Any]) {
         self.uid = dictionary["uid"] as? String ?? ""
@@ -36,5 +38,8 @@ struct Notification {
         self.postId = dictionary["postId"] as? String ?? ""
         self.id = dictionary["id"] as? String ?? ""
         self.type = NotificationType(rawValue: dictionary["type"] as? Int ?? 0) ?? .like
+        self.userProfileImageUrl = dictionary["userProfileImageUrl"] as? String ?? ""
+        self.username = dictionary["username"]  as? String ?? " "
+        
     }
 }

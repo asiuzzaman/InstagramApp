@@ -147,6 +147,8 @@ extension FeedController: FeedCellDelegate {
         //print("didlike tapped")
         
         cell.viewModel?.post.didLike.toggle()
+        guard let tab = self.tabBarController as? MainTabController else { return }
+        guard let user = tab.user else { return }
         
         if post.didLike {
             print("Unlike your post")
@@ -167,6 +169,7 @@ extension FeedController: FeedCellDelegate {
                 cell.viewModel?.post.likes = post.likes + 1
                 NotificationService.uploadNotification(
                     toUid: post.ownerId,
+                    fromUser: user,
                     type: .like,
                     post: post
                 )

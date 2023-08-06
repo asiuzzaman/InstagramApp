@@ -112,7 +112,6 @@ extension CommentController: CommentInputAccessoryViewDelegate {
     func inputView(_ inputVeiw: CommentInputAccessoryView, wantsToUploadComment comment: String) {
         
         guard let tab = self.tabBarController as? MainTabController else { return }
-        
         guard let user = tab.user else { return }
         
         self.showLoader(true)
