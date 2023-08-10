@@ -36,6 +36,7 @@ struct NotificationService {
             data["postId"] = post.postId
             data["postImageUrl"] = post.imageUrl
         }
+       // print("uploaded notification data: \(data)")
         docRef.setData(data)
     }
     

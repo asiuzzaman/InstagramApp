@@ -141,6 +141,9 @@ extension ProfileController: ProfileHeaderDelegate {
     func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
         print("[ProfileController] Handle action in controller")
         
+        guard let tab = self.tabBarController as? MainTabController else { return }
+        guard let currentUser = tab.user else { return }
+        
         if user.isCurrentUser {
             print("Show edit profile")
         }
@@ -155,6 +158,11 @@ extension ProfileController: ProfileHeaderDelegate {
         }
         else {
             print("Handle follow the user here")
+            NotificationService.uploadNotification(
+                toUid: user.uid,
+                fromUser: currentUser,
+                type: .follow
+            )
             UserService.follow(uid: user.uid) {
                 error in
                 self.user.isFollowed = true
