@@ -45,6 +45,7 @@ struct NotificationService {
         COLLECTION_NOTIFICATIONS
             .document(uid)
             .collection("user-notifications")
+            .order(by: "timestamp", descending: true)
             .getDocuments {
             snapshot, _ in
             
