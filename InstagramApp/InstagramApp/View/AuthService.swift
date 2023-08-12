@@ -15,6 +15,7 @@ struct AuthCredentials {
     let fullName: String
     let profileImage: UIImage
 }
+typealias SendPasswordResetCallback = (Error?)-> Void
 
 struct AuthService {
     
@@ -53,6 +54,10 @@ struct AuthService {
             }
         }
         
+    }
+    
+    static func resetPassword(withEmail email: String, completion: SendPasswordResetCallback?) {
+        Auth.auth().sendPasswordReset(withEmail: email, completion: completion)
     }
 }
 
