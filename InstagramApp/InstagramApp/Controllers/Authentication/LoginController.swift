@@ -90,6 +90,7 @@ class LoginController: UIViewController {
     @objc func handleForgetPassword() {
         let controller = ResetPasswordViewController()
         controller.delegate = self
+        controller.email = emailTextField.text
         navigationController?.pushViewController(controller, animated: true)
     }
     

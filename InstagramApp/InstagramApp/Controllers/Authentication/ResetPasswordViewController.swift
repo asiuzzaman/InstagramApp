@@ -20,6 +20,8 @@ class ResetPasswordViewController: UIViewController {
     
     weak var delegate: ResetPasswordViewControllerDelegate?
     
+    var email: String?
+    
     private let iconImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(imageLiteralResourceName: "Instagram_logo_white"))
         imageView.contentMode = .scaleAspectFit
@@ -53,7 +55,9 @@ class ResetPasswordViewController: UIViewController {
     
     
     func configureUI() {
-        //view.backgroundColor = .gray
+        emailTextField.text = email
+        viewModel.email = email
+        updateForm()
         configureGradientLayer()
         view.addSubview(backButton)
         backButton.anchor(

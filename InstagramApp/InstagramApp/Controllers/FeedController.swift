@@ -49,7 +49,6 @@ class FeedController: UICollectionViewController {
                 if let index = self.posts.firstIndex(where: { $0.postId == post.postId }) {
                     self.posts[index].didLike = didLike
                 }
-                
             }
         }
     }
