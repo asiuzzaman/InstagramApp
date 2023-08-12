@@ -7,6 +7,7 @@ I have tried to build an Instagram Clone app. I did cover the following features
 - Follow another user.
 - Unfollow users
 - Fetch likes, Comments, picture from database.
+- No storyboard
 
 
 Database: Firestore
