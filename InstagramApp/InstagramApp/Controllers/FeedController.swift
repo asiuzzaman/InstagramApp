@@ -31,7 +31,7 @@ class FeedController: UICollectionViewController {
         
         guard post == nil else { return }
         
-        PostServices.fetchPosts {
+        PostServices.fetchFeedPosts {
             posts in
             self.posts = posts
             print("fetchPosts is called ")

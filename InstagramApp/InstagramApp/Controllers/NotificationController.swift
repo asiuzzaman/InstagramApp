@@ -33,6 +33,7 @@ class NotificationController: UITableViewController {
             print("Fetched Notifications are: \(notifications)")
         }
     }
+    
     func checkIfUserIsFollowed() {
         notifications.forEach { notification in
             
@@ -126,7 +127,5 @@ extension NotificationController: NotificationCellDelegate {
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
-    
-    
 }
 
