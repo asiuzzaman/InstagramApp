@@ -27,7 +27,9 @@ struct PostServices {
                 "ownerImageUrl": user.profileImageUrl
             ]
             
-            COLLECTION_POSTS.addDocument(data: data, completion: completion)
+           let docRef = COLLECTION_POSTS.addDocument(data: data, completion: completion)
+            
+            self.updateUserFeedAfterPost(postId: docRef.documentID)
         }
     }
     
@@ -161,7 +163,7 @@ struct PostServices {
             }
     }
     
-    static func updateUserFeedAfterFollowing(user: User) {
+    static func updateUserFeedAfterFollowing(user: User, didFollow: Bool) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         let query = COLLECTION_POSTS.whereField("ownerId", isEqualTo: user.uid)
@@ -171,16 +173,50 @@ struct PostServices {
             
             let docIds = documents.map { $0.documentID }
             
-            docIds.forEach {
-                id in
-                COLLECTION_USERS
-                    .document(uid)
-                    .collection("user-feed")
-                    .document(id)
-                    .setData([:])
+            docIds.forEach { id in
+                if didFollow {
+                    COLLECTION_USERS
+                        .document(uid)
+                        .collection("user-feed")
+                        .document(id)
+                        .setData([:])
+                }
+                else {
+                    COLLECTION_USERS
+                        .document(uid)
+                        .collection("user-feed")
+                        .document(id)
+                        .delete()
+                }
             }
             
         }
+    }
+    
+    private static func updateUserFeedAfterPost(postId: String) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        COLLECTION_FOLLOWERS
+            .document(uid)
+            .collection("user-followers")
+            .getDocuments { snapshot, error in
+                guard let documents = snapshot?.documents else { return }
+                
+                documents.forEach { document in
+                    COLLECTION_USERS
+                        .document(document.documentID)
+                        .collection("user-feed")
+                        .document(postId)
+                        .setData([:])
+                }
+                
+                COLLECTION_USERS
+                    .document(uid)
+                    .collection("user-feed")
+                    .document(postId)
+                    .setData([:])
+                
+            }
     }
     
 }

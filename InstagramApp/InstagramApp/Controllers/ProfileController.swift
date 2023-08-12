@@ -154,6 +154,7 @@ extension ProfileController: ProfileHeaderDelegate {
                 error in
                 self.user.isFollowed = false
                 self.collectionView.reloadData()
+                PostServices.updateUserFeedAfterFollowing(user: user, didFollow: false)
             }
         }
         else {
@@ -169,7 +170,7 @@ extension ProfileController: ProfileHeaderDelegate {
                     type: .follow
                 )
                 
-                PostServices.updateUserFeedAfterFollowing(user: user)
+                PostServices.updateUserFeedAfterFollowing(user: user, didFollow: true)
             }
         }
     }
