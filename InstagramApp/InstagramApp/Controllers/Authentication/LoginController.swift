@@ -57,6 +57,7 @@ class LoginController: UIViewController {
     private let forgetPasswordButton: UIButton = {
        let button = UIButton()
         button.attributedTitle(firstPart: "Forget you pass? ", secondPart: "Get into sign in.")
+        button.addTarget(self, action: #selector(handleForgetPassword), for: .touchUpInside)
         return button
     }()
     
@@ -83,6 +84,11 @@ class LoginController: UIViewController {
     @objc func handleShowSignUp() {
         let controller = RegistrationController()
         controller.registrationDelegate = delegate
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc func handleForgetPassword() {
+        let controller = ResetPasswordViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
