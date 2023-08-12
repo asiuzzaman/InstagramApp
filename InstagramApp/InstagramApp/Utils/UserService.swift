@@ -89,10 +89,9 @@ struct UserService {
                 guard let isFollowed = snapshot?.exists else {
                     return
                 }
+               // print("check isFollowed: \(isFollowed)")
                 completion(isFollowed)
             }
-        
-        
     }
     
     static func fetchUserStats(uid: String, completion: @escaping(UserStats?) -> Void) {

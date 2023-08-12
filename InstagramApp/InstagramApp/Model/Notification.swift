@@ -16,7 +16,7 @@ enum NotificationType: Int {
         switch self {
         case .like: return " liked your post"
         case .comment: return " commented on your post"
-        case .follow: return " started following your"
+        case .follow: return " started following you"
         }
     }
 }
@@ -30,6 +30,7 @@ struct Notification {
     let id: String
     let userProfileImageUrl: String
     let username: String
+    var userIsFollowed = false
     
     init(dictionary: [String: Any]) {
         self.uid = dictionary["uid"] as? String ?? ""
