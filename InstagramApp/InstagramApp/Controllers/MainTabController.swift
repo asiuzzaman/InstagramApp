@@ -120,8 +120,6 @@ class MainTabController: UITabBarController {
             
             if cancle {
                 self.selectedIndex = 0
-                guard let navController = self.viewControllers?.first as? UINavigationController else { return }
-                guard let feed = navController.viewControllers.first as? FeedController else { return }
             }
         }
         
