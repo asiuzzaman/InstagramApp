@@ -104,7 +104,7 @@ class MainTabController: UITabBarController {
     }
     
     func didFinishPickingMedia(for picker: YPImagePicker) {
-        picker.didFinishPicking { items, _ in
+        picker.didFinishPicking { items, cancle in
             picker.dismiss(animated: false) {
                 guard let selectedImage = items.singlePhoto?.image else { return }
                 print(" Debug: Selected Image is : \(selectedImage)")
@@ -118,6 +118,11 @@ class MainTabController: UITabBarController {
                 self.present(nav, animated: false, completion: nil)
             }
             
+            if cancle {
+                self.selectedIndex = 0
+                guard let navController = self.viewControllers?.first as? UINavigationController else { return }
+                guard let feed = navController.viewControllers.first as? FeedController else { return }
+            }
         }
         
     }
