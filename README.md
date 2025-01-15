@@ -17,3 +17,8 @@ Pattern: MVVM.
 Language: Swift
 
 Packages: Firebase, JGProgressHD, YPImagePicker, SDWebImage,
+Find the following links if you are interested in the implemented features.
+
+https://www.youtube.com/watch?v=EhVTottjEeI 
+
+https://www.youtube.com/watch?v=PSb5euvYwqM
